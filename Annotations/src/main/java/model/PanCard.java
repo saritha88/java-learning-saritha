@@ -2,14 +2,11 @@ package model;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
-
 import annotations.ConsistencyCheck;
 import annotations.Dob;
 import annotations.Document;
 import annotations.Name;
 import annotations.NotNull;
-import annotations.PhoneNo;
 
 @Document(name = "PAN")
 public class PanCard extends DocumentType implements Serializable  {

@@ -17,49 +17,57 @@ import model.DocumentType;
 import model.PanCard;
 import validators.ConsistencyCheckValidator;
 
-public class ResultCheck {
+public class AnnotationDriver {
 
-	public static final Logger logger = Logger.getLogger(ResultCheck.class.getName());
+	public static final Logger logger = Logger.getLogger(AnnotationDriver.class.getName());
 
 	public static void main(String[] args) throws IllegalAccessException {
 
-		LocalDate date = LocalDate.of(1988,06,19);
+		LocalDate date = LocalDate.of(1988, 06, 19);
 		PanCard pan = new PanCard("sarithab", "ALTPB0854F", date);
-		AdhaarCard aadhaar = new AdhaarCard("sarithab", 867478704875L, date,"saritha.bolla@gmail.com", "9949711160");
-		BankStatement statement = new BankStatement("sarithab", 4565656L, date,"saritha.bolla@gmail.com", "9949711160");
+		AdhaarCard aadhaar = new AdhaarCard("sarithab", 867478704875L, date, "saritha.bolla@gmail.com", "9949711160");
+		BankStatement statement = new BankStatement("sarithab", 4565656L, date, "saritha.bolla@gmail.com",
+				"9949711160");
 		List<DocumentType> documents = new ArrayList<>();
+
 		documents.add(pan);
 		documents.add(aadhaar);
 		documents.add(statement);
-		checkAllAreDocuments(documents);
+		if (isAllAreDocuments(documents)) {
+			if (ValidationCheck.validateEachFieldOverAnnotation(documents)) {
+				Map<String, DocumentType> map = getMapOfDocuments(documents);
+				validateConsistency(map, documents);
+			}
+		}
 
 	}
 
-	public static boolean checkAllAreDocuments(List<DocumentType> documents) throws IllegalAccessException {
+	// Checking wheather all documnets fall under valid Document category
+	public static boolean isAllAreDocuments(List<DocumentType> documents) {
 
-		Map<String, DocumentType> docs = new HashMap<>();
 		for (DocumentType doc : documents) {
 
-			if (doc.getClass().isAnnotationPresent(annotations.Document.class)) {
-				docs.put(doc.getClass().getSimpleName(), doc);
+			if (!doc.getClass().isAnnotationPresent(annotations.Document.class)) {
+				logger.log(Level.SEVERE, "Missing @Document in some class " + doc.getClass().getSimpleName());
+				return false;
 			}
 		}
-		if (docs.size() != documents.size()) {
-			logger.log(Level.SEVERE, "Missing @Document in some class");
-			return false;
-		} else {
-
-			if (ValidationCheck.validateEachDocument(documents)) {
-				validateConsistency(docs, documents);
-			}
-		}
-
 		return true;
 
 	}
+	
+	private static Map<String, DocumentType> getMapOfDocuments(List<DocumentType> documents) {
+		Map<String, DocumentType> map = new HashMap<>();
+
+		for (DocumentType doc1 : documents) {
+			map.put(doc1.getClass().getSimpleName(), doc1);
+		}
+		return map;
+	}
 
 	private static void validateConsistency(Map<String, DocumentType> map, List<DocumentType> documents)
-			throws IllegalAccessException {
+			throws  IllegalAccessException {
+
 		for (DocumentType doc : documents) {
 			Field[] fields = doc.getClass().getDeclaredFields();
 			for (Field field : fields) {
@@ -73,7 +81,7 @@ public class ResultCheck {
 
 					if (cvs.validate(o.toString(), map.get(myAnnotation.matchClass().getSimpleName()))) {
 
-						logger.info("Validation success "+doc.getClass().getName());
+						logger.info("Validation success " + doc.getClass().getName());
 					}
 				}
 			}

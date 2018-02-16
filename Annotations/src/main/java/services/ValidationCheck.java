@@ -2,6 +2,7 @@ package services;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,7 +13,6 @@ import annotations.Name;
 import annotations.NotNull;
 import annotations.PhoneNo;
 import model.DocumentType;
-import validators.DateValidator;
 import validators.EmailValidator;
 import validators.NameValidator;
 import validators.PhoneNoValidator;
@@ -20,7 +20,7 @@ import validators.PhoneNoValidator;
 public class ValidationCheck {
 	public static final Logger logger = Logger.getLogger(ValidationCheck.class.getName());
 
-	static boolean  validateEachDocument(List<DocumentType> documents) throws IllegalAccessException {
+	public static boolean  validateEachFieldOverAnnotation(List<DocumentType> documents) throws IllegalAccessException {
 		boolean valid = false;
 		for (DocumentType doc : documents) {
 
@@ -53,7 +53,7 @@ public class ValidationCheck {
 			check=check && nameValidation(doc, field, ann);
 		} 
 		 if (ann instanceof Dob) {
-			check=check && dobValidation(doc, field);
+			check=check && dobValidation(doc, field,ann);
 		} 
 		 if (ann instanceof PhoneNo) {
 			check=check && phoneNumberValidation(doc, field, ann);
@@ -98,11 +98,10 @@ return check;
 
 	}
 
-	private static boolean dobValidation(DocumentType doc, Field field) throws IllegalAccessException {
-		Object dob = field.get(doc);
-		DateValidator d=new DateValidator();
-		if (!d.isValid(dob.toString())) {
-			logger.log(Level.SEVERE, "Invalid date format");
+	private static boolean dobValidation(DocumentType doc, Field field,Annotation ann) throws IllegalAccessException {
+		LocalDate dob = (LocalDate) field.get(doc);
+		if (dob.isAfter(((Dob) ann).maxDate) || dob.isBefore(((Dob) ann).minDate) ) {
+			logger.log(Level.SEVERE, "Invalid date");
 			return false;
 		}
 		return true;
