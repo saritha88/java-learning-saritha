@@ -1,6 +1,6 @@
 package com.learning;
 
-public enum ValidationType implements EnumType {
+public enum ValidationType{
 	
 	EMAIL(1),NAME(2),TELNO(3);
 	
@@ -11,10 +11,9 @@ public enum ValidationType implements EnumType {
 	}
 
 	
-	@Override
 	public Integer getValue() {
 		return i;
 	}
-	
+
 
 }

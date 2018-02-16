@@ -1,8 +1,8 @@
 package com.learning;
 
-public interface   EnumType{
+public interface   EnumType<T> {
 	
-	<T> T getValue();
+	T getValue();
 
 	 
 }

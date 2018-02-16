@@ -1,32 +1,38 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import annotations.ConsistencyCheck;
 import annotations.Dob;
 import annotations.Document;
 import annotations.Email;
+import annotations.Name;
 import annotations.NotNull;
 import annotations.PhoneNo;
 
 @Document(name = "AdhaarCard")
-@ConsistencyCheck(baseField = "fullName", matchClass = PanCard.class, matchField = "fullName")
-public class AdhaarCard implements Serializable, DocumentType {
+public class AdhaarCard extends DocumentType implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+    
 	@NotNull
+	@Name
+	@ConsistencyCheck(matchClass = PanCard.class, matchField = "fullName")
 	private String fullName;
 
 	@NotNull
 	private Long adhaarNo;
+	@NotNull
 	@Dob
-	private Date dob;
+	private LocalDate dob;
+	@NotNull
 	@Email
 	private String email;
+	@NotNull
 	@PhoneNo
 	private String phNo;
 
@@ -46,11 +52,11 @@ public class AdhaarCard implements Serializable, DocumentType {
 		this.adhaarNo = adhaarNo;
 	}
 
-	public Date getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 
@@ -70,7 +76,7 @@ public class AdhaarCard implements Serializable, DocumentType {
 		this.phNo = phNo;
 	}
 
-	public AdhaarCard(String fullName, Long adhaarNo, Date dob, String email, String phNo) {
+	public AdhaarCard(String fullName, Long adhaarNo, LocalDate dob, String email, String phNo) {
 		super();
 		this.fullName = fullName;
 		this.adhaarNo = adhaarNo;

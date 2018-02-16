@@ -8,15 +8,14 @@ import java.lang.annotation.Target;
 import model.DocumentType;
 
 @Retention(RetentionPolicy.RUNTIME)
-@Target(ElementType.TYPE)
+@Target(ElementType.FIELD)
 
 public @interface ConsistencyCheck {
 
 	
-	String message() default "{annotations.ConsistencyCheck.message}";
+	String message() default "{All documents should consists of same name}";
 
     Class<? extends DocumentType> matchClass();
-    String baseField();
     String matchField();
 
 }

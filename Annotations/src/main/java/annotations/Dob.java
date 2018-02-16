@@ -11,9 +11,4 @@ public @interface Dob {
 
 	String message() default "invalid date";
 
-    Class<?>[] groups() default {};
-
-   
-boolean optional() default false;
-
 }

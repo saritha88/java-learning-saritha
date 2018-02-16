@@ -1,29 +1,33 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import annotations.ConsistencyCheck;
 import annotations.Dob;
 import annotations.Document;
+import annotations.Name;
 import annotations.NotNull;
 import annotations.PhoneNo;
 
 @Document(name = "PAN")
-@ConsistencyCheck(baseField = "fullName", matchClass = BankStatement.class, matchField = "fullName")
-
-public class PanCard implements Serializable, DocumentType {
+public class PanCard extends DocumentType implements Serializable  {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
 	@NotNull
+	@Name
+	@ConsistencyCheck(matchClass = BankStatement.class, matchField = "fullName")
 	private String fullName;
+	
 	@NotNull
 	private String number;
+	@NotNull
 	@Dob
-	private Date dob;
+	private LocalDate dob;
 
 	public String getFullName() {
 		return fullName;
@@ -41,18 +45,18 @@ public class PanCard implements Serializable, DocumentType {
 		this.number = number;
 	}
 
-	public Date getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
 
-	public PanCard(String fullName, String number, Date dob) {
+	public PanCard(String fullName, String number, LocalDate dob) {
 		super();
 		this.fullName = fullName;
 		this.number = number;
 		this.dob = dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 

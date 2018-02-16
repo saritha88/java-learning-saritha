@@ -5,13 +5,13 @@ import java.util.logging.Logger;
 public class Document {
 	public static final Logger log = Logger.getLogger(Document.class.getName());
 
-	public  <E extends EnumType, V> E getEnumString(Class<E> class1, V v) {
+	public  <E extends EnumType<?>, V> E getEnumString(Class<E> class1, V v) {
 
 		for (E en : class1.getEnumConstants()) {
 			if (en.getValue().equals(v)) {
 				return en;
 			}
-		}
+}
 		return null;
 	}
 
@@ -19,7 +19,7 @@ public class Document {
 		Document d=new Document();
 		try {
 
-			Object e = d.getEnumString(ValidationType.class, 2);
+			Object e = d.getEnumString(DocumentType.class, "pan");
 			if (e != null) {
 				String str = e.toString();
 

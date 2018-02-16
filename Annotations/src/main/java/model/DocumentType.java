@@ -1,5 +1,5 @@
 package model;
 
-public interface DocumentType {
-
+public abstract class DocumentType {
+	
 }

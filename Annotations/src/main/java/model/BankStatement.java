@@ -1,38 +1,44 @@
 package model;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 
 import annotations.ConsistencyCheck;
 import annotations.Dob;
 import annotations.Document;
 import annotations.Email;
+import annotations.Name;
 import annotations.NotNull;
 import annotations.PhoneNo;
 
 @Document(name="BankStatement")
-@ConsistencyCheck(baseField="fullName", matchClass=AdhaarCard.class,matchField="fullName")
-
-public class BankStatement implements Serializable,DocumentType {
+public class BankStatement extends DocumentType implements Serializable {
 
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
 	@NotNull
+	@Name
+	@ConsistencyCheck(matchClass=AdhaarCard.class,matchField="fullName")
 	private String fullName;
 	@NotNull
 	private Long accNo;
+	@NotNull
 	@Dob
-	private Date dob;
+	private LocalDate dob;
+	@NotNull
 	@Email
 	private String email;
+	@NotNull
 	@PhoneNo
 	private String phNo;
 	
 
-	public BankStatement(String fullName, Long accNo, Date dob, String email, String phNo) {
+	public BankStatement(String fullName, Long accNo, LocalDate dob, String email, String phNo) {
 		super();
 		this.fullName = fullName;
 		this.accNo = accNo;
@@ -57,11 +63,11 @@ public class BankStatement implements Serializable,DocumentType {
 		this.accNo = accNo;
 	}
 
-	public Date getDob() {
+	public LocalDate getDob() {
 		return dob;
 	}
 
-	public void setDob(Date dob) {
+	public void setDob(LocalDate dob) {
 		this.dob = dob;
 	}
 

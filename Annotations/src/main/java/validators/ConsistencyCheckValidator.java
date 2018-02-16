@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 
 import model.DocumentType;
 
-public class ConsistencyCheckValidator implements Validator<String> {
+public class ConsistencyCheckValidator {
 
 	@SuppressWarnings("unused")
 	private String baseField;
@@ -21,9 +21,8 @@ public class ConsistencyCheckValidator implements Validator<String> {
 
 	public boolean validate(String baseField, DocumentType doc) {
 		try {
-			Object baseFieldValue = baseField;
 			Object matchFieldValue = getFieldValue(doc, matchField);
-			return baseFieldValue != null && baseFieldValue.equals(matchFieldValue);
+			return baseField != null && baseField.equals(matchFieldValue);
 		} catch (Exception e) {
 			return false;
 		}
@@ -35,12 +34,5 @@ public class ConsistencyCheckValidator implements Validator<String> {
 		matchFied.setAccessible(true);
 		return matchFied.get(obj);
 	}
-
-	@Override
-	public boolean isValid(String str) {
-		return true;
-	}
-
-
 
 }
