@@ -11,9 +11,8 @@ import model.DocumentType;
 @Target(ElementType.FIELD)
 
 public @interface ConsistencyCheck {
-
 	
-	String message() default "{All documents should consists of same name}";
+	String message() default "{All documents should consists of same Fullname}";
 
     Class<? extends DocumentType> matchClass();
     String matchField();

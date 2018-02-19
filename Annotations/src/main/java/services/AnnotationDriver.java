@@ -36,7 +36,7 @@ public class AnnotationDriver {
 		if (isAllAreDocuments(documents)) {
 			if (ValidationCheck.validateEachFieldOverAnnotation(documents)) {
 				Map<String, DocumentType> map = getMapOfDocuments(documents);
-				validateConsistency(map, documents);
+				validateConsistency(map);
 			}
 		}
 
@@ -55,7 +55,7 @@ public class AnnotationDriver {
 		return true;
 
 	}
-	
+
 	private static Map<String, DocumentType> getMapOfDocuments(List<DocumentType> documents) {
 		Map<String, DocumentType> map = new HashMap<>();
 
@@ -65,10 +65,9 @@ public class AnnotationDriver {
 		return map;
 	}
 
-	private static void validateConsistency(Map<String, DocumentType> map, List<DocumentType> documents)
-			throws  IllegalAccessException {
-
-		for (DocumentType doc : documents) {
+	private static void validateConsistency(Map<String, DocumentType> map) throws IllegalAccessException {
+		for (String key : map.keySet()) {
+			DocumentType doc = map.get(key);
 			Field[] fields = doc.getClass().getDeclaredFields();
 			for (Field field : fields) {
 				field.setAccessible(true);
@@ -77,9 +76,9 @@ public class AnnotationDriver {
 					ConsistencyCheck myAnnotation = (ConsistencyCheck) ann;
 					Object o = field.get(doc);
 					ConsistencyCheckValidator cvs = new ConsistencyCheckValidator();
-					cvs.initialize(o.toString(), myAnnotation.matchClass(), myAnnotation.matchField());
 
-					if (cvs.validate(o.toString(), map.get(myAnnotation.matchClass().getSimpleName()))) {
+					if (cvs.validate(o.toString(), map.get(myAnnotation.matchClass().getSimpleName()),
+							myAnnotation.matchField())) {
 
 						logger.info("Validation success " + doc.getClass().getName());
 					}

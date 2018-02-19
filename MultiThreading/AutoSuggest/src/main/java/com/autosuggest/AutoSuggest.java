@@ -20,6 +20,8 @@ public class AutoSuggest {
 				logger.info(str);
 
 			}
+			
+			
 		}
 	}
 
