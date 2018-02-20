@@ -8,7 +8,7 @@ import java.util.concurrent.Callable;
 
 public class TrieWords implements Callable<Trie> {
 
-	static volatile  Trie t = new Trie();
+	static volatile Trie t = new Trie();
 	private File file;
 
 	public TrieWords(File file2) {

@@ -20,7 +20,7 @@ public class Trie {
 
 	private Trie(String content) {
 		this.content = content;
-		children = new HashMap<Character, Trie>();
+		children = new HashMap<>();
 	}
 
 	protected void add(char character) {
@@ -71,9 +71,4 @@ public class Trie {
 		return results;
 	}
 
-	public static void main(String[] args) {
-		Trie t = new Trie();
-		
 	}
-
-}

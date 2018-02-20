@@ -12,6 +12,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class AutosuggestWithTrie {
@@ -33,8 +34,8 @@ public class AutosuggestWithTrie {
 			}
 
 		} catch (IOException e) {
-			e.printStackTrace();
-		}
+			logger.log(Level.SEVERE, e.getMessage());;	
+			}
 
 		List<String> results = t.autoComplete(token, t);
 		for (Iterator<String> iterator = results.iterator(); iterator.hasNext();) {
