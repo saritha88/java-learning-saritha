@@ -59,7 +59,7 @@
 		<module>Generics</module>
 		<module>Collections</module>
     <module>Annotations</module>
-  </modules>
+    <module>Observable</module>
+	</modules>
 
 </project>
-

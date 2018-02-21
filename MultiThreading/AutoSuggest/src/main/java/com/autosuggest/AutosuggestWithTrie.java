@@ -34,13 +34,15 @@ public class AutosuggestWithTrie {
 			}
 
 		} catch (IOException e) {
-			logger.log(Level.SEVERE, e.getMessage());;	
-			}
+			logger.log(Level.SEVERE, e.getMessage());
+			
+		}
 
 		List<String> results = t.autoComplete(token, t);
 		for (Iterator<String> iterator = results.iterator(); iterator.hasNext();) {
-			String string = iterator.next();
-			System.out.println(string);
+			String str = iterator.next();
+
+			logger.info(str);
 		}
 	}
 
