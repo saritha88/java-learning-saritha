@@ -1,24 +1,20 @@
-package com.impl;
+package com.subject;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.learning.Blog;
-import com.learning.Observer;
+import com.observer.Observer;
 
-public class Topic implements Blog {
+public class BlogComments implements Subject {
 
 	private List<Observer> observers;
 	private String message;
 	private boolean changed;
 	private final Object MUTEX= new Object();
-
 	
-	public Topic() {
-		super();
-		this.observers = new ArrayList<>();
+	public BlogComments(){
+		this.observers=new ArrayList<>();
 	}
-
 	@Override
 	public void register(Observer obj) {
 		if(obj == null) throw new NullPointerException("Null Observer");
@@ -30,9 +26,8 @@ public class Topic implements Blog {
 	@Override
 	public void unregister(Observer obj) {
 		synchronized (MUTEX) {
-			observers.remove(obj);
-			}
-
+		observers.remove(obj);
+		}
 	}
 
 	@Override
@@ -48,6 +43,7 @@ public class Topic implements Blog {
 		for (Observer obj : observersLocal) {
 			obj.update();
 		}
+
 	}
 
 	@Override
@@ -55,6 +51,7 @@ public class Topic implements Blog {
 		return this.message;
 	}
 	
+	//method to post message to the topic
 	public void postMessage(String msg){
 		System.out.println("Message Posted to Topic:"+msg);
 		this.message=msg;

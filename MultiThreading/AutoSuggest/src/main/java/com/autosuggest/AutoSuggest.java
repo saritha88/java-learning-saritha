@@ -11,7 +11,7 @@ public class AutoSuggest {
     
 		public static void main(String[] args) throws Exception {
 
-			ExecutorService executer = Executors.newSingleThreadExecutor();
+			ExecutorService executer = Executors.newCachedThreadPool();
 
 			Future<List<String>> future=executer.submit(new WordLengthCallable("/home/sarithab/Desktop/result/result.txt"));
 

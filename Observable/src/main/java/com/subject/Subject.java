@@ -1,6 +1,9 @@
-package com.learning;
+package com.subject;
 
-public interface Blog {
+import com.observer.Observer;
+
+public interface Subject {
+	
 	public void register(Observer obj);
 	public void unregister(Observer obj);
 	
@@ -9,4 +12,5 @@ public interface Blog {
 	
 	//method to get updates from subject
 	public Object getUpdate(Observer obj);
+
 }
