@@ -5,5 +5,6 @@ import java.util.List;
 
 public interface Keywords {
 
+	String basePath="/home/sarithab/Desktop/";
 	public List<String> getKeywords() throws IOException;
 }

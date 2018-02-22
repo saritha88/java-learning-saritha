@@ -7,9 +7,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -22,8 +22,8 @@ public class Searcher {
 	@SuppressWarnings("unchecked")
 	public static void main(String[] args) throws IOException, InterruptedException, ExecutionException {
 
-		ExecutorService executorService = Executors.newFixedThreadPool(10);
-		Map<String, Integer> map = new HashMap<>();
+		ExecutorService executorService = Executors.newCachedThreadPool();
+		Map<String, Integer> map = new ConcurrentHashMap<>();
 
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get("/home/sarithab/Desktop/output/"))) {
 			for (Path entry : stream) {

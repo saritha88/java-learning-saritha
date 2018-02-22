@@ -22,7 +22,7 @@ class ThreadingKeywords implements Keywords {
 	public List<String> getKeywords() throws IOException {
 		String[] str = null;
 		List<String> list = new ArrayList<>();
-		String pathToCSV = "/home/sarithab/Downloads/" + fileName + ".txt";
+		String pathToCSV = basePath + fileName + ".txt";
 		String line = "";
 		try (BufferedReader in = new BufferedReader(new FileReader(pathToCSV))){
 			line=in.readLine();

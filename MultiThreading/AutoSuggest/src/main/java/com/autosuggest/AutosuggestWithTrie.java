@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
@@ -24,7 +25,7 @@ public class AutosuggestWithTrie {
 		String token = sc.nextLine();
 
 		ExecutorService executorService = Executors.newFixedThreadPool(10);
-		Trie t = new Trie();
+		Trie t = null;
 
 		try (DirectoryStream<Path> stream = Files.newDirectoryStream(Paths.get("/home/sarithab/Desktop/output/"))) {
 			for (Path entry : stream) {
@@ -35,14 +36,14 @@ public class AutosuggestWithTrie {
 
 		} catch (IOException e) {
 			logger.log(Level.SEVERE, e.getMessage());
-			
+
 		}
-
-		List<String> results = t.autoComplete(token, t);
-		for (Iterator<String> iterator = results.iterator(); iterator.hasNext();) {
-			String str = iterator.next();
-
-			logger.info(str);
+		if (Objects.nonNull(t)) {
+			List<String> results = t.autoComplete(token, t);
+			for (Iterator<String> iterator = results.iterator(); iterator.hasNext();) {
+				String str = iterator.next();
+				logger.info(str);
+			}
 		}
 	}
 

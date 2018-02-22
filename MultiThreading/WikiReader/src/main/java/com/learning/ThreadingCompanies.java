@@ -20,7 +20,7 @@ private String fileName;
 		
 		List<String> list = new ArrayList<>();
 		String[] str;
-		String pathToCSV = "/home/sarithab/Downloads/"+fileName+".txt";
+		String pathToCSV = basePath+fileName+".txt";
 		String line = "";
 			try (BufferedReader in = new BufferedReader(new FileReader(pathToCSV))) {
 		

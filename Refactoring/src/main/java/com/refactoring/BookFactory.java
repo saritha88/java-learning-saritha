@@ -1,5 +1,6 @@
 package com.refactoring;
 
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -7,20 +8,22 @@ public class BookFactory {
 private static final Logger logger=Logger.getLogger(BookFactory.class.getName());
 	
 
-	public static Book getBookInstance(String title,int category) {
+	public static Optional<Book> getBookInstance(String title,int category) {
+		if(category!=-1)
 		switch (category) {
 		case (Book.FICTION):
-			return new Fiction(title);
+			return Optional.of(new Fiction(title));
 
 		case (Book.NON_FICTION):
-			return new NonFiction(title);
+			return Optional.of(new NonFiction(title));
 
 		case (Book.CHILDRENS):
-			return new ChidrenBook(title);
+			return Optional.of(new ChidrenBook(title));
 		default:
 			logger.log(Level.SEVERE,"Invalid category");
-		}
-		return null;
+		
+	}
+		return Optional.empty();
 	}
 	
 	private BookFactory() {

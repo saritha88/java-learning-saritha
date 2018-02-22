@@ -1,21 +1,25 @@
 package com.learning;
 
+import java.util.Optional;
+
 public class Factory {
 
-	public  Keywords getMethods(String filename) {
-		if(filename.equals("Multithreading_Task2_ProgrammingLanguages"))
+	
+	
+	public  Optional<Keywords> getInstance(Delimeter e) {
+		if(e.equals(Delimeter.COMMA_SEPERATED))
 		{
-		return new ThreadingLanguages(filename);
+		return Optional.of(new ThreadingKeywords(e.getName()));
 		}
-		if(filename.equals("Multithreading_Task_2_java Keywords")) {
-			return new ThreadingKeywords(filename);
+		if(e.equals(Delimeter.TAB_SEPERATED)) {
+			return Optional.of(new ThreadingCompanies(e.getName()));
 		}
-		if(filename.equals("Multithreading_Task_2_fortune1000companies"))
+		if(e.equals(Delimeter.NEWLINE))
 		{
-			return new ThreadingCompanies(filename);
+			return Optional.of(new ThreadingLanguages(e.getName()));
 		}
 			
-		return null;
+		return Optional.empty();
 		
 	}
 }

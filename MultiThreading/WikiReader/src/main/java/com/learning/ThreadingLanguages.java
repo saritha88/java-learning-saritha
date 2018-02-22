@@ -23,7 +23,7 @@ private String fileName;
 	public List<String> getKeywords() throws IOException {
 		String[] str = null;
 		List<String> list = new ArrayList<>();
-		String pathToCSV = "/home/sarithab/Downloads/" +fileName+".txt";
+		String pathToCSV = basePath +fileName+".txt";
 		try (BufferedReader in = new BufferedReader(new FileReader(pathToCSV))){
 		String line = null;
 		 line=in.readLine();

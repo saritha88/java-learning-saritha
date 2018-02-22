@@ -65,8 +65,7 @@ public class Trie {
 		
 		for (Map.Entry<Character, Trie> entry : children.entrySet()) {
 			Trie child = entry.getValue();
-			Collection<String> childPrefixes = child.allPrefixes();
-			results.addAll(childPrefixes);
+			results.addAll(child.allPrefixes());
 		}
 		return results;
 	}

@@ -7,10 +7,11 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 public class WordSearch implements Callable<Map<String, Integer>> {
-	static volatile  Map<String, Integer> countByWords = new HashMap<>();
+	static volatile  Map<String, Integer> countByWords = new ConcurrentHashMap<String, Integer>();
 
 	private File file;
 
