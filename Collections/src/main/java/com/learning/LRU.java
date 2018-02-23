@@ -14,9 +14,9 @@ public class LRU {
 		this.list = new LinkedList<>();
 	}
 
-	private void addElement(int i) {
+	private void addElement(Object i) {
 		if (list.size() < this.capacity) {
-			if (!list.contains(Integer.valueOf(i))) {
+			if (!list.contains(i) ){
 
 				list.addFirst(i);
 			} else {
@@ -26,7 +26,7 @@ public class LRU {
 
 		} else {
 
-			if (!list.contains(Integer.valueOf(i))) {
+			if (!list.contains(i)) {
 				list.removeLast();
 
 				list.addFirst(i);
