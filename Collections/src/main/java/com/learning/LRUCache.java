@@ -1,57 +1,89 @@
 package com.learning;
 
 import java.util.HashMap;
-import java.util.Stack;
 
 public class LRUCache {
-	private HashMap<String, Object> lruMap;
-	private Stack<String> stack;
-	int capacity;
+
+	private int capacity;
+	private HashMap<Integer, Node> map = new HashMap<>();
+	private Node head = null;
+	private Node end = null;
 
 	public LRUCache(int capacity) {
-		super();
 		this.capacity = capacity;
-		this.lruMap = new HashMap<String, Object>(capacity);
-		this.stack = new Stack<String>();
 	}
 
-	public void put(String key, Object value) {
-		System.out.println(lruMap.size());
-		String remove;
-		if (lruMap.containsKey(key) || this.capacity < lruMap.size() + 1) {
-			if (lruMap.containsKey(key)) {
-				remove = key;
-			} else {
-				remove = this.stack.pop();
-			}
-			this.stack.removeElement(remove);
-			this.lruMap.remove(remove);
+	public int get(int key) {
+		if (map.containsKey(key)) {
+			Node n = map.get(key);
+			remove(n);
+			setHead(n);
+			return n.value;
 		}
-		this.lruMap.put(key, value);
-		this.stack.add(key);
+		return -1;
 	}
 
-	public Stack<String> get() {
-		return this.stack;
+	public void set(int key, int value) {
+		if (map.containsKey(key)) {
+			Node old = map.get(key);
+			old.value = value;
+			remove(old);
+			setHead(old);
+		} else {
+			Node created = new Node(key, value);
+			if (map.size() >= capacity) {
+				System.out.println("Removing : ");
+				map.remove(end.key);
+				remove(end);
+				setHead(created);
+			} else {
+				setHead(created);
+			}
+			map.put(key, created);
+		}
+
 	}
 
-	public Object get(String key) {
-		Object value = lruMap.get(key);
-		put(key, value);
-		return value;
+	public void setHead(Node n) {
+		n.next = head;
+		n.pre = null;
+		if (head != null)
+			head.pre = n;
+		head = n;
+		if (end == null)
+			end = head;
+	}
+
+	public void remove(Node n) {
+		if (n.pre != null)
+			n.pre.next = n.next;
+		else
+			head = n.next;
+
+		if (n.next != null)
+			n.next.pre = n.pre;
+		else
+			end = n.pre;
 	}
 
 	public static void main(String[] args) {
-		LRUCache lru = new LRUCache(3);
-	
-		lru.put("k1", "v1");
-		lru.put("k2", "v2");
-		lru.put("k3", "v3");
-		System.out.println(lru.get());
-		lru.get("k1");
-		System.out.println(lru.get());
-		lru.put("k4", "v4");
-		System.out.println(lru.get());
-	}
+		System.out.println("Main function");
+		LRUCache l = new LRUCache(5);
 
+		l.set(1, 10);
+		l.set(5, 12);
+		l.set(5, 12);
+		l.set(5, 12);
+		l.set(5, 12);
+		
+		System.out.println(l.get(5));
+		System.out.println(l.get(1));
+		l.set(6, 14);
+
+		l.set(7, 15);
+		l.set(8, 16);
+		l.set(9, 17);
+
+		System.out.println(l.get(5));
+	}
 }

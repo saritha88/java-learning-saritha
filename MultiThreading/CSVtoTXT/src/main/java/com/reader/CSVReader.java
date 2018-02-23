@@ -21,6 +21,7 @@ class Reader implements Runnable {
 	}
 
 	private synchronized void readCSV() {
+		
 		String line;
 		int i = 0;
 		StringBuilder sb = new StringBuilder("");

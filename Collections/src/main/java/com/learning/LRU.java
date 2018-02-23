@@ -59,5 +59,5 @@ public class LRU {
 		System.out.println(result);
 
 	}
-
+	
 }

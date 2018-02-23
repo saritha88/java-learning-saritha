@@ -20,7 +20,7 @@ public class CSVWriter  implements Runnable{
 
 
 	public void run() {
-		
+		System.out.println("in writer");
 		try (BufferedWriter oWriter= new BufferedWriter(new FileWriter("/home/sarithab/Documents/data/data_"+index+".csv"))){
        
 			oWriter.write (message);
