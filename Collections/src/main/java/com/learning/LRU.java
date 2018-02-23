@@ -5,7 +5,7 @@ import java.util.List;
 
 public class LRU {
 
-	private LinkedList<Integer> list;
+	private LinkedList<Object> list;
 	int capacity;
 
 	public LRU(int capacity) {
@@ -16,7 +16,7 @@ public class LRU {
 
 	private void addElement(int i) {
 		if (list.size() < this.capacity) {
-			if (!list.contains(i)) {
+			if (!list.contains(Integer.valueOf(i))) {
 
 				list.addFirst(i);
 			} else {
@@ -26,7 +26,7 @@ public class LRU {
 
 		} else {
 
-			if (!list.contains(i)) {
+			if (!list.contains(Integer.valueOf(i))) {
 				list.removeLast();
 
 				list.addFirst(i);
@@ -39,7 +39,7 @@ public class LRU {
 		}
 	}
 
-	private LinkedList<Integer> getElements() {
+	private LinkedList<Object> getElements() {
 		return this.list;
 
 	}
@@ -53,7 +53,9 @@ public class LRU {
 		cache.addElement(3);
 		cache.addElement(4);
 		cache.addElement(2);
-		List<Integer> result = cache.getElements();
+		cache.addElement(6);
+
+		List<Object> result = cache.getElements();
 		System.out.println(result);
 
 	}
