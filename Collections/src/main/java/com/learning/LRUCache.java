@@ -16,6 +16,7 @@ public class LRUCache {
 	}
 
 	public void put(String key, Object value) {
+		System.out.println(lruMap.size());
 		String remove;
 		if (lruMap.containsKey(key) || this.capacity < lruMap.size() + 1) {
 			if (lruMap.containsKey(key)) {
@@ -42,6 +43,7 @@ public class LRUCache {
 
 	public static void main(String[] args) {
 		LRUCache lru = new LRUCache(3);
+	
 		lru.put("k1", "v1");
 		lru.put("k2", "v2");
 		lru.put("k3", "v3");
