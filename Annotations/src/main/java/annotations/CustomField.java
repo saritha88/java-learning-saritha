@@ -10,7 +10,6 @@ import java.lang.annotation.Target;
 public @interface CustomField {
 	
 	String value();
-	//String message() default "invalid format";
 	String message();
 
 }

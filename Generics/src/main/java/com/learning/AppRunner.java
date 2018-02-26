@@ -2,8 +2,8 @@ package com.learning;
 
 import java.util.logging.Logger;
 
-public class Document {
-	public static final Logger log = Logger.getLogger(Document.class.getName());
+public class AppRunner {
+	public static final Logger log = Logger.getLogger(AppRunner.class.getName());
 
 	public  <E extends EnumType<?>, V> E getEnumString(Class<E> class1, V v) {
 
@@ -16,12 +16,12 @@ public class Document {
 	}
 
 	public static void main(String[] args) {
-		Document d=new Document();
+		AppRunner obj=new AppRunner();
 		try {
 
-			Object e = d.getEnumString(DocumentType.class, "statement");
-			if (e != null) {
-				String str = e.toString();
+			Object result = obj.getEnumString(ValidationType.class, 2);
+			if (result != null) {
+				String str = result.toString();
 
 				log.info(str);
 			}
