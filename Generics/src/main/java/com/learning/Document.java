@@ -19,7 +19,7 @@ public class Document {
 		Document d=new Document();
 		try {
 
-			Object e = d.getEnumString(DocumentType.class, "pan");
+			Object e = d.getEnumString(DocumentType.class, "statement");
 			if (e != null) {
 				String str = e.toString();
 

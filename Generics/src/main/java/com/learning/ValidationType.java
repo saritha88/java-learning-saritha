@@ -1,6 +1,6 @@
 package com.learning;
 
-public enum ValidationType{
+public enum ValidationType {
 	
 	EMAIL(1),NAME(2),TELNO(3);
 	

@@ -5,10 +5,8 @@ import java.time.LocalDate;
 import annotations.ConsistencyCheck;
 import annotations.Dob;
 import annotations.Document;
-import annotations.Email;
-import annotations.Name;
+import annotations.CustomField;
 import annotations.NotNull;
-import annotations.PhoneNo;
 
 @Document(name = "AdhaarCard")
 public class AdhaarCard extends DocumentType implements Serializable {
@@ -18,21 +16,21 @@ public class AdhaarCard extends DocumentType implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
     
-	@NotNull
-	@Name
+	@NotNull(message = "Value cannot be null")
+	@CustomField(value = "[a-zA-Z]{8,20}",message="Name should be alteast 8 characters")
 	@ConsistencyCheck(matchClass = PanCard.class, matchField = "fullName")
 	private String fullName;
 
-	@NotNull
+	@NotNull(message = "Value cannot be null")
 	private Long adhaarNo;
-	@NotNull
+	@NotNull(message = "Value cannot be null")
 	@Dob
 	private LocalDate dob;
-	@NotNull
-	@Email
+	@NotNull(message = "Value cannot be null")
+	@CustomField(value = "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$",message="Invalid email")
 	private String email;
-	@NotNull
-	@PhoneNo
+	@NotNull(message = "Value cannot be null")
+	@CustomField(value = "(^$|[0-9]{10})",message="Phone no should be 10 digits")
 	private String phNo;
 
 	public String getFullName() {

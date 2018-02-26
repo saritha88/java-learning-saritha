@@ -7,7 +7,10 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Email {
+public @interface CustomField {
 	
-	
+	String value();
+	//String message() default "invalid format";
+	String message();
+
 }

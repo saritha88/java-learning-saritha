@@ -5,14 +5,22 @@ import java.util.List;
 import com.constants.ContentType;
 import com.observer.Observer;
 
-public class BlogArticle implements Subject {
+public class BlogArticle  extends Blog implements Subject  {
 	private List<Observer> observers;
 	private String message;
 	private boolean changed;
 	private final Object MUTEX = new Object();
 
 	public BlogArticle() {
+		
 		this.observers = new ArrayList<>();
+		
+	}
+
+	private static BlogArticle notifyBlog() {
+		System.out.println("iam in notify blog");
+		return new BlogArticle();
+	
 	}
 
 	@Override
@@ -59,6 +67,7 @@ public class BlogArticle implements Subject {
 		if(type.equals(ContentType.TEXT)) {
 		this.message = msg;
 		this.changed = true;
+	
 		notifyObservers();
 	}else if(type.equals(ContentType.VIDEO)) {
 		this.message = msg;

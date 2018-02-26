@@ -3,26 +3,25 @@ package model;
 import java.io.Serializable;
 import java.time.LocalDate;
 import annotations.ConsistencyCheck;
+import annotations.CustomField;
 import annotations.Dob;
 import annotations.Document;
-import annotations.Name;
 import annotations.NotNull;
 
 @Document(name = "PAN")
-public class PanCard extends DocumentType implements Serializable  {
+public class PanCard extends DocumentType implements Serializable {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
-	@NotNull
-	@Name
+	@NotNull(message = "Value cannot be null")
+	@CustomField(value = "[a-zA-Z]{8,20}", message = "Name should be alteast 8 characters")
 	@ConsistencyCheck(matchClass = BankStatement.class, matchField = "fullName")
 	private String fullName;
-	
-	@NotNull
+
+	@NotNull(message = "Value cannot be null")
 	private String number;
-	@NotNull
+	@NotNull(message = "Value cannot be null")
 	@Dob
 	private LocalDate dob;
 

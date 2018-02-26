@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -24,9 +25,9 @@ public class AnnotationDriver {
 	public static void main(String[] args) throws IllegalAccessException {
 
 		LocalDate date = LocalDate.of(1988, 06, 19);
-		PanCard pan = new PanCard("sarithab", "ALTPB0854F", date);
-		AdhaarCard aadhaar = new AdhaarCard("sarithab", 867478704875L, date, "saritha.bolla@gmail.com", "9949711160");
-		BankStatement statement = new BankStatement("sarithab", 4565656L, date, "saritha.bolla@gmail.com",
+		PanCard pan = new PanCard("sarithabb", "ALTPB0854F", date);
+		AdhaarCard aadhaar = new AdhaarCard("sarithabb", 867478704875L, date, "saritha.bolla@gmail.com", "9949711160");
+		BankStatement statement = new BankStatement("sarithabb", 4565656L, date, "saritha.bolla@gmail.com",
 				"9949711160");
 		List<DocumentType> documents = new ArrayList<>();
 
@@ -66,8 +67,8 @@ public class AnnotationDriver {
 	}
 
 	private static void validateConsistency(Map<String, DocumentType> map) throws IllegalAccessException {
-		for (String key : map.keySet()) {
-			DocumentType doc = map.get(key);
+		for (Entry<String, DocumentType> key : map.entrySet()) {
+			DocumentType doc = map.get(key.getKey());
 			Field[] fields = doc.getClass().getDeclaredFields();
 			for (Field field : fields) {
 				field.setAccessible(true);
