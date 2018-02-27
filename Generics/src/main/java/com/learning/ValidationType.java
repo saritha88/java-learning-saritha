@@ -5,7 +5,8 @@ public enum ValidationType implements EnumType<Integer> {
 	EMAIL {
 		@Override
 		public Integer getValue() {
-			return 1;
+			
+			return 10;
 		}
 	},
 	NAME {
