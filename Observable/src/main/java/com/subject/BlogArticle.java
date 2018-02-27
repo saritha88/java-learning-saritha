@@ -4,30 +4,21 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import com.constants.ContentType;
 import com.observer.BlogSection;
 import com.observer.Observer;
 
 public class BlogArticle extends BlogSection implements Subject {
-	private List<Observer> observers;
-	private List<Observer> textobservers;
-	private List<Observer> Videoobservers;
-	private Map<ContentType, List<Observer>> map;
 
+	public Map<ContentType, List<Observer>> map;
+	private List<Observer> observers;
 	private String message;
 	private boolean changed;
 	private String name;
 	private ContentType type;
 
-	void postMessage() {
-		Blog.getInstance().addBlogSection(this);
-	}
-
 	public BlogArticle(String name, String message) {
 		this.observers = new ArrayList<>();
-		this.textobservers = new ArrayList<>();
-		this.Videoobservers = new ArrayList<>();
 		this.map = new HashMap<>();
 		this.name = name;
 		this.message = message;
@@ -35,19 +26,33 @@ public class BlogArticle extends BlogSection implements Subject {
 
 	}
 
+	void postMessage() {
+		Blog.getInstance().addBlogSection(this);
+	}
+
 	@Override
 	public void register(Observer obj) {
-		if (obj != null) {
-			if (!observers.contains(obj)) {
-				observers.add(obj);
-			}
-		}
+
+		/*
+		 * if (obj != null) { System.out.println("in for loop"+map.size());
+		 * for(Map.Entry<String, List<Observer>> entry:map.entrySet()) {
+		 * 
+		 * String key=entry.getKey(); System.out.println(key); List<Observer>
+		 * observers=entry.getValue(); if (!observers.contains(obj)) {
+		 * observers.add(obj); } System.out.println(observers.size());
+		 * 
+		 * }
+		 * 
+		 * }
+		 */
+
+		register(obj, ContentType.values());
 	}
 
 	@Override
 	public void unregister(Observer obj) {
 
-		observers.remove(obj);
+		// observers.remove(obj);
 
 	}
 
@@ -57,7 +62,7 @@ public class BlogArticle extends BlogSection implements Subject {
 		if (!changed)
 
 			return;
-		observersLocal = new ArrayList<>(this.observers);
+		// observersLocal = new ArrayList<>(this.observers);
 		this.changed = false;
 
 		for (Observer obj : observersLocal) {
@@ -89,14 +94,39 @@ public class BlogArticle extends BlogSection implements Subject {
 		}
 	}
 
-	public void register(Observer obj, ContentType type ) {
+	public void register(Observer obj, ContentType... type) {
 		Blog.getInstance().register(obj);
-		List<Observer> list = map.get(type);
-		if (obj != null) {
-			if (!list.contains(obj)) {
-				list.add(obj);
+
+		for (ContentType content : type) {
+			if (type == null) {
+				if (map.containsKey(content)) {
+					observers = map.get(content);
+					if (obj != null) {
+						observers.add(obj);
+					}
+				} else {
+					if (obj != null) {
+						observers.add(obj);
+					}
+					map.put(content, observers);
+				}
+			} else {
+				if (map.containsKey(content)) {
+					observers = map.get(content);
+					if (obj != null) {
+						observers.add(obj);
+					}
+				} else {
+					if (obj != null) {
+						observers.add(obj);
+					}
+					map.put(content, observers);
+				}
+				/*
+				 * observers = map.get(type); if (obj != null) { observers.add(obj); }
+				 */
 			}
 		}
-	}
 
+	}
 }

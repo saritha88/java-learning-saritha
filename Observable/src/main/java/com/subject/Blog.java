@@ -11,17 +11,15 @@ import com.observer.Observer;
 
 public class Blog implements Subject {
 	private List<Observer> observers;
-	private Map<String, List<BlogSection>> map;
+	private Map<String, List<? extends BlogSection>> map;
 	private String message;
 	private boolean changed;
-	private Listner lisner;
 	private static Blog blog;
 
 	private Blog() {
 		this.map = new HashMap<>();
 		this.observers = new ArrayList<>();
-		lisner = new Listner();
-		postConstruct();
+
 	}
 
 	public static Blog getInstance() {
@@ -29,10 +27,6 @@ public class Blog implements Subject {
 			blog = new Blog();
 		}
 		return blog;
-	}
-
-	private void postConstruct() {
-		lisner.setInstanceBlog(this);
 	}
 
 	@Override
@@ -59,16 +53,14 @@ public class Blog implements Subject {
 		return this.message;
 	}
 
-	public <T> void addBlogSection(T t) {
+	public <T extends BlogSection> void addBlogSection(T t) {
 
 		this.message = "New post is added in blog";
 		this.changed = true;
-		if (t instanceof BlogArticle) {
-			List<BlogSection> list = new ArrayList<>();
-			list.add((BlogSection) t);
-			map.put(t.getClass().getSimpleName(), list);
+		List<T> list = new ArrayList<>();
+		list.add(t);
+		map.put(t.getClass().getSimpleName(), list);
 
-		}
 		notifyObservers();
 
 	}
