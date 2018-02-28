@@ -1,16 +1,22 @@
 package com.subject;
 
+import com.constants.ContentType;
 import com.observer.Observer;
 
 public interface Subject {
-	
+
 	public void register(Observer obj);
+
 	public void unregister(Observer obj);
-	
-	//method to notify observers of change
+
 	public void notifyObservers();
-	
-	//method to get updates from subject
+
 	public Object getUpdate(Observer obj);
+
+	public void UpdateContent();
+
+	public void RemoveContent();
+
+	void addContent(ContentType type, String str);
 
 }

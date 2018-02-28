@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.constants.ContentType;
 import com.constants.Listner;
 import com.observer.BlogSection;
 import com.observer.Observer;
@@ -32,8 +33,9 @@ public class Blog implements Subject {
 	@Override
 	public void register(Observer obj) {
 
-		if (!observers.contains(obj))
+		if (!observers.contains(obj)) {
 			observers.add(obj);
+		}
 	}
 
 	@Override
@@ -72,5 +74,41 @@ public class Blog implements Subject {
 
 		notifyObservers();
 
+	}
+
+	@Override
+	public void UpdateContent(Observer obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void RemoveContent(Observer obj) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addContent(ContentType type, Object Content) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void UpdateContent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void RemoveContent() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void addContent(ContentType type, String str) {
+		// TODO Auto-generated method stub
+		
 	}
 }

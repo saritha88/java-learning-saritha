@@ -25,4 +25,9 @@ public class ObserverImpl implements Observer {
 		this.topic = sub;
 	}
 
+	@Override
+	public String toString() {
+		return "ObserverImpl [name=" + name + ", topic=" + topic + "]";
+	}
+
 }
