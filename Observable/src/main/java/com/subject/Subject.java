@@ -1,5 +1,8 @@
 package com.subject;
 
+import java.util.List;
+
+import com.constants.Content;
 import com.constants.ContentType;
 import com.observer.Observer;
 
@@ -13,10 +16,10 @@ public interface Subject {
 
 	public Object getUpdate(Observer obj);
 
-	public void UpdateContent();
+	public void UpdateContent(Content content);
 
-	public void RemoveContent();
+	void addContent(Content content);
 
-	void addContent(ContentType type, String str);
+	void RemoveContent(Content cont);
 
 }

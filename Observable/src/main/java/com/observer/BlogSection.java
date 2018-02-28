@@ -5,16 +5,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.constants.Content;
 import com.constants.ContentType;
 import com.subject.Blog;
 import com.subject.Subject;
 
-public class BlogSection<T> implements Subject {
+public class BlogSection implements Subject {
 	public Map<ContentType, List<Observer>> map;
 	private String message;
 	private boolean changed;
 	private String name;
-	private Map<ContentType, String> content;
+	private List<Content> content;
 
 	public BlogSection(String name, String message) {
 		this.map = new HashMap<>();
@@ -23,7 +24,7 @@ public class BlogSection<T> implements Subject {
 		postMessage();
 	}
 
-	public BlogSection(String name, String message, Map<ContentType, String> content) {
+	public BlogSection(String name, String message, List<Content> content) {
 		this.map = new HashMap<>();
 		this.name = name;
 		this.message = message;
@@ -42,8 +43,22 @@ public class BlogSection<T> implements Subject {
 
 	@Override
 	public void unregister(Observer obj) {
-		// observers.remove(obj);
+		unregister(obj, ContentType.values());
 
+	}
+
+	private void unregister(Observer obj, ContentType...values) {
+		for (ContentType content : values) {
+			List<Observer> observers1 = null;
+
+			observers1 = map.get(content);
+			if (obj != null && !observers1.contains(obj)) {
+
+				observers1.remove(obj);
+
+			}
+
+		}
 	}
 
 	@Override
@@ -52,8 +67,7 @@ public class BlogSection<T> implements Subject {
 		if (!changed)
 
 			return;
-
-		// observersLocal = map.get();
+	    //observersLocal = map.get();
 		this.changed = false;
 
 		for (Observer obj : observersLocal) {
@@ -91,13 +105,18 @@ public class BlogSection<T> implements Subject {
 	}
 
 	@Override
-	public void addContent(ContentType type, String str) {
-		System.out.println("Content is addedd:"+str);
+	public void addContent(Content cont) {
+		System.out.println("Content is addedd:" + cont.toString());
 		this.changed = true;
-		String obj = content.get(type);
-		obj.concat(str);
-		content.put(type, obj);
-		notifyObservers(type);
+		
+		for (int i = 0; i < content.size(); i++) {
+			
+			Content con = content.get(i);
+			if (con.getType().equals(cont.getType())) {
+				con.getValue().toString().concat(cont.getValue().toString());
+			}
+		}
+		notifyObservers((ContentType) cont.getType());
 
 	}
 
@@ -107,23 +126,40 @@ public class BlogSection<T> implements Subject {
 			return;
 		observersLocal = map.get(type);
 		this.changed = false;
-
 		for (Observer obj : observersLocal) {
 			obj.update();
 		}
 
 	}
 
-
 	@Override
-	public void UpdateContent() {
-		// TODO Auto-generated method stub
-		
+	public void RemoveContent(Content cont) {
+		System.out.println("Content is deleted:" + cont.toString());
+		this.changed = true;
+		for (int i = 0; i < content.size(); i++) {
+			Content con = content.get(i);
+			if (con.getType().equals(cont.getType())) {
+				content.remove(i);
+			}
+		}
+		notifyObservers((ContentType) cont.getType());
 	}
 
 	@Override
-	public void RemoveContent() {
-		// TODO Auto-generated method stub
+	public void UpdateContent(Content cont) {
+		System.out.println("Content is Updated:" + cont.toString());
+		this.changed = true;
+		
+		for (int i = 0; i < content.size(); i++) {
+			Content con = content.get(i);
+			
+			if (con.getType().equals(cont.getType())) {
+				
+				con.setValue(cont);
+			}
+		}
+		notifyObservers((ContentType) cont.getType());
+
+	}
 		
 	}
-}

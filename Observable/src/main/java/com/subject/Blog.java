@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.constants.Content;
 import com.constants.ContentType;
-import com.constants.Listner;
 import com.observer.BlogSection;
 import com.observer.Observer;
 
@@ -77,38 +77,21 @@ public class Blog implements Subject {
 	}
 
 	@Override
-	public void UpdateContent(Observer obj) {
+	public void UpdateContent(Content content) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void RemoveContent(Observer obj) {
+	public void addContent(Content content) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void addContent(ContentType type, Object Content) {
+	public void RemoveContent(Content cont) {
 		// TODO Auto-generated method stub
 		
 	}
 
-	@Override
-	public void UpdateContent() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void RemoveContent() {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void addContent(ContentType type, String str) {
-		// TODO Auto-generated method stub
-		
-	}
 }

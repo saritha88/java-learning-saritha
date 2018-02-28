@@ -17,7 +17,7 @@ public class ObserverImpl implements Observer {
 		if (msg == null) {
 			System.out.println(name + ":: No new message");
 		} else
-			System.out.println(name + ":: Consuming message::" + msg);
+			System.out.println(name + ":: Consuming message::");
 	}
 
 	@Override
