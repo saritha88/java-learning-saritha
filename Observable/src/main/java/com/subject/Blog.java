@@ -15,7 +15,7 @@ public class Blog implements Subject {
 	private Map<String, List<? extends BlogSection>> map;
 	private String message;
 	private boolean changed;
-	private static Blog blog;
+	private static Blog instance;
 
 	private Blog() {
 		this.map = new HashMap<>();
@@ -23,11 +23,11 @@ public class Blog implements Subject {
 
 	}
 
-	public static Blog getInstance() {
-		if (blog == null) {
-			blog = new Blog();
+	public static  synchronized Blog getInstance() {
+		if (instance == null) {
+			instance = new Blog();
 		}
-		return blog;
+		return instance;
 	}
 
 	@Override
@@ -78,19 +78,16 @@ public class Blog implements Subject {
 
 	@Override
 	public void UpdateContent(Content content) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void addContent(Content content) {
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void RemoveContent(Content cont) {
-		// TODO Auto-generated method stub
 		
 	}
 
