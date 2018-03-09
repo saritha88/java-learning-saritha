@@ -18,7 +18,7 @@ public class Stack {
 		}
 
 		arr[index] = element;
-		index++;
+		index++; 
 
 	}
 

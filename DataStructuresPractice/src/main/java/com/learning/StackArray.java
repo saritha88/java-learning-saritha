@@ -1,5 +1,7 @@
 package com.learning;
 
+import java.util.LinkedList;
+
 public class StackArray {
 	public static void main(String[] args) {
 		Stack stack = new Stack(5);
@@ -14,6 +16,7 @@ public class StackArray {
 		stack.pop();
 
 		System.out.println("size after poping" + stack.size());
+		LinkedList l;
 	}
 
 }
