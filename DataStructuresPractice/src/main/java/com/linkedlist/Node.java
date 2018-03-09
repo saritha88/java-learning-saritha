@@ -1,4 +1,4 @@
-package com.learning;
+package com.linkedlist;
 
 public class Node {
 
@@ -6,7 +6,6 @@ public class Node {
 	private Node next;
 
 	public Node() {
-		super();
 		this.data = 0;
 		this.next = null;
 	}

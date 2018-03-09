@@ -1,12 +1,12 @@
-package com.learning;
+package com.linkedlist;
 
-public class LinkedListExample {
+public class SinglyLinkedList {
 
 	Node head;
 	Node tail;
 	int size = 0;
 
-	public LinkedListExample() {
+	public SinglyLinkedList() {
 		super();
 		this.head = null;
 		this.tail = null;
@@ -110,7 +110,7 @@ public class LinkedListExample {
 			int pos = size - 1;
 			if (i == pos) {
 				ptr.setNext(null);
-				
+
 			}
 			ptr = ptr.getNext();
 		}
@@ -121,24 +121,13 @@ public class LinkedListExample {
 
 	public static void main(String[] args) {
 
-		LinkedListExample list = new LinkedListExample();
+		SinglyLinkedList list = new SinglyLinkedList();
 
 		list.addFirst(1);
 		list.add(10);
 		list.add(13);
 		list.addAtPos(122, 2);
-		System.out.println("before deleting");
-
-		for (int i = 0; i < list.size; i++) {
-			System.out.println("index=" + i + "  value=" + list.getData(i));
-		}
 		list.deleteLast();
-		System.out.println("after deleting");
-
-		for (int i = 0; i < list.size; i++) {
-			System.out.println("index=" + i + "  value=" + list.getData(i));
-		}
-
 	}
 
 }
