@@ -128,6 +128,7 @@ public class SinglyLinkedList {
 		list.add(13);
 		list.addAtPos(122, 2);
 		list.deleteLast();
+		System.out.println(list);
 	}
 
 }

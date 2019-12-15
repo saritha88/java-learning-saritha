@@ -1,0 +1,12 @@
+Rules consider when caluclate BigO notations:
+1.Consider worst case'
+2.Drop constansts
+3.Different variants for different inputs means if two loops of different size are using then big) will be O(n+m)
+4.Drop dominats means if we found n^2+3n+100+n/2 in such case ignore rest excluding n^2 as the n increases n^2 will
+ increase more than rest of the values so consider n^2 as bigO.
+
+ If two loops are iterated one after other then bigO will be
+ O(size of 1st array + size of 2nd array)
+
+ It they are nested loops then BigO will be
+ O(size of array * size of array)

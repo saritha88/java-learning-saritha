@@ -63,6 +63,8 @@
 		<module>Observable</module>
 		<module>DataStructuresPractice</module>
 		<module>Java8Features</module>
-	</modules>
+        <module>Problems</module>
+        <module>Practice</module>
+    </modules>
 
 </project>
