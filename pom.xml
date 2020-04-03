@@ -65,6 +65,7 @@
 		<module>Java8Features</module>
         <module>Problems</module>
         <module>Practice</module>
+        <module>Threads</module>
     </modules>
 
 </project>
